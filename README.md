@@ -1,26 +1,80 @@
-# 🤖 Desk-Emoji Robot - Web Edition
+# 🤖 Desk-Emoji Robot - Complete Cross-Platform Suite
 
-A vivid, interactive web application that reproduces the **desk-emoji** robot project with expressive animated emotions and simulated gimbal movements.
+A vivid, interactive application suite that reproduces the **desk-emoji** robot project with expressive animated emotions and simulated gimbal movements.
 
-## 🎯 Two Versions Available!
+## 🎯 Four Platforms Available!
 
-### 1. **Emoji Version** (index.html)
+### 1. **Web Version** (index.html)
+- Universal access via web browser
+- No installation required
+- Works on any device with a browser
+
+### 2. **PWA Version** (Progressive Web App)
+- Installable on iPhone/Android home screen
+- Offline capability
+- App-like experience
+
+### 3. **Native iOS App** ⭐ **NEW!**
+- Full native Swift/SwiftUI application
+- App Store ready
+- Advanced haptics and animations
+- **[Complete Build Guide →](NATIVE_IOS_GUIDE.md)**
+
+### 4. **Native Apple Watch App** ⌚ **NEW!**
+- Companion watchOS application
+- Wrist-based emotion selection
+- Watch face complications ready
+- **[Complete Build Guide →](NATIVE_IOS_GUIDE.md)**
+
+---
+
+## 🌐 Web/PWA Versions
+
+### Emoji Version (index.html)
 - 12 colorful Unicode emoji emotions (😊😍🤩😎)
 - Vibrant colors and playful animations
 - Perfect for demonstrations and fun interactions
 
-### 2. **Robot Face Version** (index-robot.html) ⭐ **AUTHENTIC**
+### Robot Face Version (index-robot.html) ⭐ **AUTHENTIC**
 - Programmatically drawn robot faces using HTML5 Canvas
 - Based on the **actual desk-emoji firmware code**
 - Faithfully recreates the OLED display rendering
 - 10 robot expressions with realistic eye movements
 - Perfect for authentic robot simulation
 
-**📖 [Read the Complete Usage Guide](USAGE.md)** for detailed instructions!
+**📖 [Read the Complete Usage Guide](USAGE.md)** for detailed web/PWA instructions!
+
+---
+
+## 📱⌚ Native iOS & watchOS Apps
+
+**NEW! Full native applications for iPhone and Apple Watch!**
+
+### Native Features:
+- ✅ **SwiftUI Architecture** - Modern declarative UI
+- ✅ **Haptic Feedback** - Impact, selection, notification types
+- ✅ **3D Animations** - Native Core Animation
+- ✅ **Apple Watch App** - Full watchOS companion
+- ✅ **Tab Interface** - Easy switching between versions
+- ✅ **Canvas Rendering** - Authentic robot face drawing
+- ✅ **App Store Ready** - Production-quality code
+- ✅ **Offline First** - No internet required
+
+### What's Included:
+- **iOS App** - Two tabs (Emoji + Robot Face)
+- **watchOS App** - Two views (swipeable)
+- **Shared Code** - Emotion models and state management
+- **Complete Documentation** - Build and deploy guides
+
+**📱 [Native iOS & watchOS Build Guide →](NATIVE_IOS_GUIDE.md)**
+
+**📁 [iOS Source Code →](ios-native/)**
+
+---
 
 ## 🎯 Overview
 
-This web app brings the charm of a physical desk emoji robot to your browser, featuring:
+This complete suite brings the charm of a physical desk emoji robot to multiple platforms, featuring:
 
 - **Two distinct visual styles** - Emoji and Robot Face versions
 - **Authentic robot face rendering** based on original firmware
