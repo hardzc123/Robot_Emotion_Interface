@@ -117,21 +117,27 @@ ios-native/
 - **iPhone** running iOS 17+ (for testing)
 - **Apple Watch** running watchOS 10+ (optional, for testing)
 
-### Step 1: Open in Xcode
+### Step 1: Create the Xcode Project
 
-1. **Download/Clone this repository**
+⚠️ **IMPORTANT:** The Xcode project needs to be created properly in Xcode first.
 
-2. **Navigate to ios-native folder:**
-   ```bash
-   cd Robot_Emotion_Interface/ios-native/
-   ```
+**Follow the complete setup guide:**
 
-3. **Open the Xcode project:**
-   ```bash
-   open DeskEmojiRobot.xcodeproj
-   ```
+📖 **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Step-by-step instructions (5 minutes)
 
-   Or double-click `DeskEmojiRobot.xcodeproj` in Finder
+**Quick summary:**
+1. Create new iOS App project in Xcode
+2. Add the Swift files from this directory
+3. Configure targets and signing
+4. Build and run!
+
+**Or run the helper script:**
+```bash
+cd Robot_Emotion_Interface/ios-native/
+./create-project.sh
+```
+
+The script will show you what to do next.
 
 ### Step 2: Configure Signing
 
