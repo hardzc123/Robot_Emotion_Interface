@@ -3,42 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desk-Emoji Robot - Vivid Emotions</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Desk-Emoji Robot - Authentic Robot Faces</title>
+    <link rel="stylesheet" href="style-robot.css">
 </head>
 <body>
     <div class="container">
         <h1>🤖 Desk-Emoji Robot</h1>
-        <p class="subtitle">Vivid Robot Emotions Interface</p>
-        <p class="version-badge">Emoji Version - Unicode Characters</p>
+        <p class="subtitle">Authentic Robot Emotion Faces</p>
+        <p class="version-badge">Robot Face Version - Programmatically Drawn</p>
 
         <!-- Robot Display -->
         <div class="robot-container">
             <div class="robot-body" id="robotBody">
                 <div class="emoji-display" id="emojiDisplay">
-                    <div class="face-container" id="faceContainer">
-                        <!-- Dynamic emoji face will be rendered here -->
-                    </div>
+                    <!-- Canvas for drawing robot face -->
+                    <canvas id="robotCanvas" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
 
         <!-- Emotion Controls -->
         <div class="controls">
-            <h2>Select Emotion</h2>
+            <h2>Select Robot Emotion</h2>
             <div class="emotion-grid">
-                <button class="emotion-btn" data-emotion="happy">😊 Happy</button>
-                <button class="emotion-btn" data-emotion="excited">🤩 Excited</button>
-                <button class="emotion-btn" data-emotion="love">😍 Love</button>
-                <button class="emotion-btn" data-emotion="cool">😎 Cool</button>
-                <button class="emotion-btn" data-emotion="thinking">🤔 Thinking</button>
-                <button class="emotion-btn" data-emotion="confused">😕 Confused</button>
+                <button class="emotion-btn active" data-emotion="happy">😊 Happy</button>
                 <button class="emotion-btn" data-emotion="sad">😢 Sad</button>
                 <button class="emotion-btn" data-emotion="angry">😠 Angry</button>
-                <button class="emotion-btn" data-emotion="sleepy">😴 Sleepy</button>
                 <button class="emotion-btn" data-emotion="surprised">😲 Surprised</button>
-                <button class="emotion-btn" data-emotion="laugh">😂 Laughing</button>
-                <button class="emotion-btn" data-emotion="wink">😉 Wink</button>
+                <button class="emotion-btn" data-emotion="sleepy">😴 Sleepy</button>
+                <button class="emotion-btn" data-emotion="wakeup">👀 Waking Up</button>
+                <button class="emotion-btn" data-emotion="blink">😑 Blinking</button>
+                <button class="emotion-btn" data-emotion="lookLeft">👈 Look Left</button>
+                <button class="emotion-btn" data-emotion="lookRight">👉 Look Right</button>
+                <button class="emotion-btn" data-emotion="center">😐 Center</button>
             </div>
         </div>
 
@@ -46,7 +43,7 @@
         <div class="movement-controls">
             <h2>Gimbal Control</h2>
             <div class="joystick-container">
-                <div class="joystick-label">Tilt</div>
+                <div class="joystick-label">Tilt Robot Head</div>
                 <div class="joystick">
                     <button class="move-btn" data-direction="up">↑</button>
                     <div class="joystick-row">
@@ -62,17 +59,17 @@
         <!-- Animation Mode -->
         <div class="animation-controls">
             <h2>Animation Mode</h2>
-            <button class="action-btn" id="idleMode">🌀 Idle Animation</button>
+            <button class="action-btn" id="idleMode">🌀 Idle Blinking</button>
             <button class="action-btn" id="randomMode">🎲 Random Emotions</button>
             <button class="action-btn" id="expressiveMode">✨ Expressive Mode</button>
         </div>
 
         <!-- Version Switcher -->
         <div class="version-switcher">
-            <a href="index-robot.html" class="switch-btn">Switch to Robot Face Version 🤖</a>
+            <a href="index.html" class="switch-btn">Switch to Emoji Version 😊</a>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app-robot.js"></script>
 </body>
 </html>

@@ -2,27 +2,39 @@
 
 A vivid, interactive web application that reproduces the **desk-emoji** robot project with expressive animated emotions and simulated gimbal movements.
 
+## 🎯 Two Versions Available!
+
+### 1. **Emoji Version** (index.html)
+- 12 colorful Unicode emoji emotions (😊😍🤩😎)
+- Vibrant colors and playful animations
+- Perfect for demonstrations and fun interactions
+
+### 2. **Robot Face Version** (index-robot.html) ⭐ **AUTHENTIC**
+- Programmatically drawn robot faces using HTML5 Canvas
+- Based on the **actual desk-emoji firmware code**
+- Faithfully recreates the OLED display rendering
+- 10 robot expressions with realistic eye movements
+- Perfect for authentic robot simulation
+
+**📖 [Read the Complete Usage Guide](USAGE.md)** for detailed instructions!
+
 ## 🎯 Overview
 
 This web app brings the charm of a physical desk emoji robot to your browser, featuring:
 
-- **12 Vivid Emotions** with smooth transitions and unique animations
+- **Two distinct visual styles** - Emoji and Robot Face versions
+- **Authentic robot face rendering** based on original firmware
 - **Simulated Gimbal Control** with 2-axis tilt movements
 - **3 Animation Modes** for dynamic emotional expressions
 - **Beautiful UI** with gradient backgrounds and smooth animations
+- **Easy version switching** with one-click toggle
 - **Fully Responsive** design that works on desktop and mobile
 
 ## ✨ Features
 
-### Emotion System
+### Emotion Systems
 
-The robot supports 12 distinct emotional states, each with its own:
-- Unique emoji character
-- Custom color scheme and glow effects
-- Specific animation pattern
-- Characteristic tilt angle
-
-**Available Emotions:**
+**Emoji Version (12 emotions):**
 - 😊 Happy - Gentle pulsing animation
 - 🤩 Excited - Energetic bouncing
 - 😍 Love - Warm pulsing with pink glow
@@ -35,6 +47,18 @@ The robot supports 12 distinct emotional states, each with its own:
 - 😲 Surprised - Upward bounce
 - 😂 Laughing - Joyful shaking
 - 😉 Wink - Playful angled pose
+
+**Robot Face Version (10 emotions):**
+- 😊 Happy - Upturned eyes (drawn with triangles)
+- 😢 Sad - Downturned eyes
+- 😠 Angry - Diagonal angry brows
+- 😲 Surprised - Wide expanding eyes
+- 😴 Sleepy - Eyes closed to thin lines
+- 👀 Waking Up - Eyes gradually opening
+- 😑 Blinking - Realistic blink animation
+- 👈 Look Left - Eyes shift left
+- 👉 Look Right - Eyes shift right
+- 😐 Center - Neutral robot face
 
 ### Gimbal Control
 
@@ -69,16 +93,22 @@ Use the directional controls to tilt the robot's "head" in any direction:
 
 ### Running the App
 
-Simply open `index.html` in any modern web browser:
-
+**Option 1: Local Server (Recommended)**
 ```bash
-# Using Python's built-in server (recommended)
+# Using Python's built-in server
 python3 -m http.server 8000
-
-# Or just double-click index.html
 ```
 
-Then navigate to `http://localhost:8000` in your browser.
+Then open in your browser:
+- **Emoji Version:** `http://localhost:8000/index.html`
+- **Robot Face Version:** `http://localhost:8000/index-robot.html`
+
+**Option 2: Direct Open**
+- Double-click `index.html` for Emoji version
+- Double-click `index-robot.html` for Robot Face version
+
+**Switching Versions:**
+- Click the "Switch to..." button at the bottom of each page!
 
 ### Supported Browsers
 
@@ -100,18 +130,30 @@ Then navigate to `http://localhost:8000` in your browser.
 
 ```
 Robot_Emotion_Interface/
-├── index.html          # Main HTML structure
-├── style.css           # Styling and animations
-├── app.js             # Robot logic and interactions
-└── README.md          # Documentation
+├── index.html          # Emoji version HTML
+├── index-robot.html    # Robot face version HTML
+├── style.css           # Emoji version styling
+├── style-robot.css     # Robot face version styling
+├── app.js             # Emoji version logic
+├── app-robot.js       # Robot face rendering and logic
+├── README.md          # Main documentation
+└── USAGE.md           # Detailed usage guide
 ```
 
 ### Key Technologies
 
+**Emoji Version:**
 - **3D Transforms** - `transform: rotateX() rotateY()` for gimbal simulation
 - **CSS Animations** - Keyframe-based emotion animations
 - **Gradient Effects** - Dynamic box-shadow and color gradients
 - **Event Handling** - Responsive button interactions
+
+**Robot Face Version:**
+- **HTML5 Canvas** - Programmatic 2D drawing API
+- **Rounded Rectangles** - Eye rendering (like OLED fillRoundRect)
+- **Triangle Overlays** - Emotion modification technique
+- **Animation Loops** - Smooth eye transitions and blinking
+- **Authentic Algorithm** - Based on desk-emoji firmware code
 
 ## 🎭 Customization
 
@@ -145,15 +187,26 @@ Add new animations in `style.css`:
 }
 ```
 
-## 🌟 Inspiration
+## 🌟 Inspiration & Authenticity
 
-This project is inspired by the open-source **[desk-emoji](https://github.com/ideamark/desk-emoji)** hardware robot, which features:
-- Physical emoji display screen
+This project is inspired by and directly based on the open-source **[desk-emoji](https://github.com/ideamark/desk-emoji)** hardware robot:
+
+**Original Hardware Robot:**
+- Physical 128x64 OLED display (SSD1306)
 - 2-DOF gimbal mechanism
 - LLM-powered voice chat
 - Gesture recognition
+- Programmatic eye drawing in C/C++
 
-Our web version aims to capture the expressive charm and emotional range of the physical robot in a browser-accessible format.
+**Our Web Version:**
+- **Emoji Version:** Fun, colorful interpretation with Unicode emojis
+- **Robot Face Version:** Faithful recreation of the firmware's eye drawing system
+  - Source: [emoji.cpp](https://raw.githubusercontent.com/ideamark/desk-emoji/main/firmware/Arduino_Esp32/esp32_v1.2.0/emoji.cpp)
+  - Uses the same eye rendering techniques
+  - Recreates rounded rectangle eyes with triangle overlays
+  - Implements the same 10 emotion functions from the firmware
+
+The Robot Face version translates the embedded C++ code to JavaScript Canvas API, providing an authentic simulation of how the physical robot renders expressions!
 
 ## 🎯 Future Enhancements
 
