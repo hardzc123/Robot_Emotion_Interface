@@ -1,0 +1,306 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* Robot Display */
+.robot-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.robot-body {
+    perspective: 1000px;
+    transition: transform 0.3s ease;
+}
+
+.emoji-display {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 -5px 20px rgba(255, 255, 255, 0.05),
+        0 0 0 10px rgba(255, 255, 255, 0.1),
+        0 0 0 15px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.emoji-display::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+.face-container {
+    font-size: 200px;
+    animation: emotionPulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Controls Section */
+.controls, .movement-controls, .animation-controls {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Emotion Grid */
+.emotion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.emotion-btn {
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.emotion-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(102, 126, 234, 0.4);
+    border-color: #667eea;
+}
+
+.emotion-btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.emotion-btn.active {
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    color: white;
+    border-color: #667eea;
+}
+
+/* Joystick Controls */
+.joystick-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.joystick-label {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.joystick {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.joystick-row {
+    display: flex;
+    gap: 10px;
+}
+
+.move-btn {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.move-btn:hover {
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    color: white;
+    border-color: #667eea;
+    transform: scale(1.1);
+}
+
+.move-btn:active {
+    transform: scale(0.95);
+}
+
+.move-btn.center {
+    background: linear-gradient(145deg, #e0e0e0, #f5f5f5);
+}
+
+/* Animation Controls */
+.animation-controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.action-btn {
+    flex: 1;
+    min-width: 200px;
+    padding: 20px 30px;
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+}
+
+.action-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+}
+
+.action-btn:active {
+    transform: translateY(-2px);
+}
+
+.action-btn.active {
+    background: linear-gradient(145deg, #48bb78, #38a169);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes emotionPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 10px 25px rgba(72, 187, 120, 0.5); }
+    50% { box-shadow: 0 10px 35px rgba(72, 187, 120, 0.8); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .emoji-display {
+        width: 300px;
+        height: 300px;
+    }
+
+    .face-container {
+        font-size: 150px;
+    }
+
+    .emotion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .action-btn {
+        min-width: 100%;
+    }
+}
+
+/* Special emotion animations */
+.emotion-excited {
+    animation: bounce 0.6s ease-in-out infinite !important;
+}
+
+.emotion-thinking {
+    animation: tilt 3s ease-in-out infinite !important;
+}
+
+.emotion-laugh {
+    animation: shake 0.5s ease-in-out infinite !important;
+}
+
+.emotion-sleepy {
+    animation: sway 4s ease-in-out infinite !important;
+    opacity: 0.8;
+}
+
+@keyframes tilt {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+@keyframes sway {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-10px) rotate(-3deg); }
+    75% { transform: translateX(10px) rotate(3deg); }
+}
