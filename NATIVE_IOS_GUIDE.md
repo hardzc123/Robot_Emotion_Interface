@@ -41,7 +41,9 @@ This guide covers building **NATIVE applications** (not PWA) for:
 
 ## 🏗️ Quick Start (5 Minutes)
 
-### Step 1: Open Xcode
+### Step 1: Create Xcode Project
+
+⚠️ **IMPORTANT:** The Xcode project must be created properly first!
 
 1. Make sure you have **Xcode 15+** installed ([Get it free](https://apps.apple.com/app/xcode/id497799835))
 
@@ -50,10 +52,21 @@ This guide covers building **NATIVE applications** (not PWA) for:
    cd Robot_Emotion_Interface/ios-native/
    ```
 
-3. Open the project:
+3. Run the setup helper:
    ```bash
-   open DeskEmojiRobot.xcodeproj
+   ./create-project.sh
    ```
+
+4. **Follow the complete guide:**
+   📖 **[SETUP_GUIDE.md](ios-native/SETUP_GUIDE.md)** - Detailed step-by-step (5 min)
+
+**Quick version:**
+- Open Xcode
+- File > New > Project > iOS App
+- Name: `DeskEmojiRobot`, Interface: SwiftUI
+- Save to `ios-native/` folder
+- Add Swift files from folders
+- Build!
 
 ### Step 2: Configure Your Account
 
