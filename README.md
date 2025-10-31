@@ -110,11 +110,23 @@ Then open in your browser:
 **Switching Versions:**
 - Click the "Switch to..." button at the bottom of each page!
 
+### 📱 Deploy to iPhone
+
+Want both versions on your iPhone as PWA apps?
+
+**📖 [Complete iPhone Deployment Guide](DEPLOY_TO_IPHONE.md)**
+
+Quick steps:
+1. Enable GitHub Pages for this repo
+2. Access from iPhone Safari
+3. Add to home screen (both versions!)
+4. Use like native apps 🎉
+
 ### Supported Browsers
 
-- Chrome/Edge (recommended)
+- **Safari** (required for iPhone PWA installation)
+- Chrome/Edge (recommended for desktop)
 - Firefox
-- Safari
 - Opera
 
 ## 🎨 Technical Details

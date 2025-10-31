@@ -1,0 +1,28 @@
+{
+  "name": "Desk-Emoji Robot",
+  "short_name": "Desk-Emoji",
+  "description": "Vivid Robot Emotions - Emoji and Authentic Robot Face versions",
+  "start_url": "/Robot_Emotion_Interface/index.html",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["entertainment", "utilities"],
+  "screenshots": [],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

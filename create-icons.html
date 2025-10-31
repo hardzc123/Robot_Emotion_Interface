@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create App Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { color: #333; }
+        .icon-preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        .icon-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .instructions {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Create App Icons for iPhone</h1>
+    <p>Click the buttons below to download icons for both versions.</p>
+
+    <div class="icon-preview">
+        <div class="icon-box">
+            <h3>Emoji Version Icon</h3>
+            <canvas id="emojiIcon" width="512" height="512"></canvas>
+            <br><br>
+            <button onclick="downloadIcon('emojiIcon', 'apple-touch-icon.png', 180)">Download 180x180</button>
+            <button onclick="downloadIcon('emojiIcon', 'icon-192.png', 192)">Download 192x192</button>
+            <button onclick="downloadIcon('emojiIcon', 'icon-512.png', 512)">Download 512x512</button>
+        </div>
+
+        <div class="icon-box">
+            <h3>Robot Face Icon</h3>
+            <canvas id="robotIcon" width="512" height="512"></canvas>
+            <br><br>
+            <button onclick="downloadIcon('robotIcon', 'apple-touch-icon-robot.png', 180)">Download 180x180</button>
+            <button onclick="downloadIcon('robotIcon', 'icon-192-robot.png', 192)">Download 192x192</button>
+            <button onclick="downloadIcon('robotIcon', 'icon-512-robot.png', 512)">Download 512x512</button>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 Instructions:</h3>
+        <ol>
+            <li><strong>Download all icons</strong> using the buttons above</li>
+            <li><strong>Place them</strong> in your Robot_Emotion_Interface folder</li>
+            <li><strong>Commit and push</strong> to GitHub</li>
+            <li><strong>Enable GitHub Pages</strong> (see DEPLOY_TO_IPHONE.md)</li>
+            <li><strong>Add to iPhone</strong> home screen - icons will appear!</li>
+        </ol>
+        <p><strong>Note:</strong> The icons will work even without custom images, but these make the apps look professional!</p>
+    </div>
+
+    <script>
+        // Draw Emoji Version Icon
+        function drawEmojiIcon() {
+            const canvas = document.getElementById('emojiIcon');
+            const ctx = canvas.getContext('2d');
+
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 512, 512);
+
+            // Add circular border
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 20;
+            ctx.beginPath();
+            ctx.arc(256, 256, 200, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Draw emoji
+            ctx.font = 'bold 280px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = 'white';
+            ctx.fillText('😊', 256, 270);
+        }
+
+        // Draw Robot Face Icon
+        function drawRobotIcon() {
+            const canvas = document.getElementById('robotIcon');
+            const ctx = canvas.getContext('2d');
+
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+            gradient.addColorStop(0, '#1a1a2e');
+            gradient.addColorStop(1, '#16213e');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 512, 512);
+
+            // Draw robot eyes
+            ctx.fillStyle = '#4ecca3';
+
+            // Left eye
+            roundRect(ctx, 140, 200, 80, 80, 15);
+            ctx.fill();
+
+            // Right eye
+            roundRect(ctx, 292, 200, 80, 80, 15);
+            ctx.fill();
+
+            // Add highlights
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.beginPath();
+            ctx.arc(170, 220, 15, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(322, 220, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Add antenna
+            ctx.strokeStyle = '#4ecca3';
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.moveTo(256, 100);
+            ctx.lineTo(256, 140);
+            ctx.stroke();
+
+            ctx.fillStyle = '#4ecca3';
+            ctx.beginPath();
+            ctx.arc(256, 90, 15, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Helper function for rounded rectangles
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        // Download function
+        function downloadIcon(canvasId, filename, size) {
+            const sourceCanvas = document.getElementById(canvasId);
+
+            // Create a new canvas with the desired size
+            const resizeCanvas = document.createElement('canvas');
+            resizeCanvas.width = size;
+            resizeCanvas.height = size;
+            const ctx = resizeCanvas.getContext('2d');
+
+            // Draw the source canvas onto the resize canvas
+            ctx.drawImage(sourceCanvas, 0, 0, size, size);
+
+            // Convert to blob and download
+            resizeCanvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                link.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        // Draw icons on page load
+        window.onload = function() {
+            drawEmojiIcon();
+            drawRobotIcon();
+        };
+    </script>
+</body>
+</html>
