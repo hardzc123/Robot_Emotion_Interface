@@ -1,0 +1,29 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/chi/Documents/github_hardzc123/Robot_Emotion_Interface/ios-native/DeskEmojiRobot/build/Release-watchsimulator/DeskEmojiRobotWatch.appex/DeskEmojiRobotWatch'
+relocations:
+  - { offset: 0x6326A, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch11EmotionDataCMa', symObjAddr: 0x3AC, symBinAddr: 0x10000146C, symSize: 0x20 }
+  - { offset: 0x632CD, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch0C9FaceStateCMU', symObjAddr: 0x828, symBinAddr: 0x1000018E8, symSize: 0x8 }
+  - { offset: 0x632E1, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch0C9FaceStateCMa', symObjAddr: 0x830, symBinAddr: 0x1000018F0, symSize: 0x38 }
+  - { offset: 0x632F5, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch0C9FaceStateCMr', symObjAddr: 0x868, symBinAddr: 0x100001928, symSize: 0xB4 }
+  - { offset: 0x63309, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch0C9FaceStateC7Combine16ObservableObjectAA0I19WillChangePublisherAdEP_AD0L0PWT', symObjAddr: 0x960, symBinAddr: 0x100001A20, symSize: 0xC }
+  - { offset: 0x6331D, size: 0x8, addend: 0x0, symName: '_$sS2cMScAsWl', symObjAddr: 0x9A8, symBinAddr: 0x100001A68, symSize: 0x44 }
+  - { offset: 0x63331, size: 0x8, addend: 0x0, symName: ___swift_instantiateConcreteTypeFromMangledName, symObjAddr: 0xA10, symBinAddr: 0x100001AD0, symSize: 0x44 }
+  - { offset: 0x63345, size: 0x8, addend: 0x0, symName: '_$ss36_deinitOnExecutorMainActorBackDeployyyyXln_yyXlnXfBeBwtFyyYaScMYccfU_', symObjAddr: 0xA54, symBinAddr: 0x100001B14, symSize: 0x6C }
+  - { offset: 0x6335D, size: 0x8, addend: 0x0, symName: '_$ss36_deinitOnExecutorMainActorBackDeployyyyXln_yyXlnXfBeBwtFyyYaScMYccfU_TY0_', symObjAddr: 0xAC0, symBinAddr: 0x100001B80, symSize: 0x50 }
+  - { offset: 0x6338A, size: 0x8, addend: 0x0, symName: '_$ss36_deinitOnExecutorMainActorBackDeployyyyXln_yyXlnXfBeBwtFyyYaScMYccfU_TA', symObjAddr: 0xB10, symBinAddr: 0x100001BD0, symSize: 0x84 }
+  - { offset: 0x6339E, size: 0x8, addend: 0x0, symName: '_$sScPSgWOc', symObjAddr: 0xB94, symBinAddr: 0x100001C54, symSize: 0x48 }
+  - { offset: 0x633B2, size: 0x8, addend: 0x0, symName: '_$sScPSgWOh', symObjAddr: 0xBDC, symBinAddr: 0x100001C9C, symSize: 0x40 }
+  - { offset: 0x633C6, size: 0x8, addend: 0x0, symName: '_$sxIeAgHr_xs5Error_pIegHrzo_s8SendableRzs5NeverORs_r0_lTRyt_Tgq5', symObjAddr: 0xC1C, symBinAddr: 0x100001CDC, symSize: 0x64 }
+  - { offset: 0x633E5, size: 0x8, addend: 0x0, symName: '_$sxIeAgHr_xs5Error_pIegHrzo_s8SendableRzs5NeverORs_r0_lTRyt_Tgq5TQ0_', symObjAddr: 0xC80, symBinAddr: 0x100001D40, symSize: 0x44 }
+  - { offset: 0x63404, size: 0x8, addend: 0x0, symName: '_$sxIeAgHr_xs5Error_pIegHrzo_s8SendableRzs5NeverORs_r0_lTRyt_Tgq5TA', symObjAddr: 0xCC4, symBinAddr: 0x100001D84, symSize: 0x70 }
+  - { offset: 0x63418, size: 0x8, addend: 0x0, symName: '_$ss36_deinitOnExecutorMainActorBackDeployyyyXln_yyXlnXfBeBwtFyyYaScMYccfU_TA.14', symObjAddr: 0xD64, symBinAddr: 0x100001E24, symSize: 0x84 }
+  - { offset: 0x6342C, size: 0x8, addend: 0x0, symName: '_$ss36_deinitOnExecutorMainActorBackDeployyyyXln_yyXlnXfBeBwtFyyYaScMYccfU_TA.14TQ0_', symObjAddr: 0xDE8, symBinAddr: 0x100001EA8, symSize: 0x40 }
+  - { offset: 0x63440, size: 0x8, addend: 0x0, symName: '_$sxIeAgHr_xs5Error_pIegHrzo_s8SendableRzs5NeverORs_r0_lTRyt_Tgq5TA.19', symObjAddr: 0xE4C, symBinAddr: 0x100001F0C, symSize: 0x70 }
+  - { offset: 0x63483, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch11EmotionDataCfZ', symObjAddr: 0x0, symBinAddr: 0x1000010C0, symSize: 0x90 }
+  - { offset: 0x634F5, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch11EmotionDataCfD', symObjAddr: 0x90, symBinAddr: 0x100001150, symSize: 0x31C }
+  - { offset: 0x63556, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch0C9FaceStateCfd', symObjAddr: 0x3CC, symBinAddr: 0x10000148C, symSize: 0x154 }
+  - { offset: 0x6357B, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch0C9FaceStateCfZ', symObjAddr: 0x520, symBinAddr: 0x1000015E0, symSize: 0x30 }
+  - { offset: 0x635B3, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch0C9FaceStateCfD', symObjAddr: 0x550, symBinAddr: 0x100001610, symSize: 0x2D8 }
+  - { offset: 0x6361B, size: 0x8, addend: 0x0, symName: '_$s19DeskEmojiRobotWatch0C9FaceStateC7Combine16ObservableObjectAadEP16objectWillChange0ikL9PublisherQzvgTW', symObjAddr: 0x96C, symBinAddr: 0x100001A2C, symSize: 0x3C }
+...

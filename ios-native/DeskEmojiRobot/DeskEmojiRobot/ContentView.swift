@@ -8,17 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedVersion: AppVersion = .emoji
+
+    enum AppVersion: Hashable {
+        case emoji
+        case robot
+    }
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView(selection: $selectedVersion) {
+            EmojiVersionView()
+                .tabItem {
+                    Label("Emoji", systemImage: "face.smiling")
+                }
+                .tag(AppVersion.emoji)
+
+            RobotFaceVersionView()
+                .tabItem {
+                    Label("Robot", systemImage: "eye")
+                }
+                .tag(AppVersion.robot)
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(RobotFaceState())
 }

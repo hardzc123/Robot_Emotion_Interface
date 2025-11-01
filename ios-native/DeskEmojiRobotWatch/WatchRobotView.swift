@@ -1,212 +1,382 @@
 import SwiftUI
+import WatchKit
 
 struct WatchRobotView: View {
-    @State private var currentEmotion: String = "happy"
-    @State private var eyeScale: CGFloat = 1.0
+    private let options: [RobotEmotionOption] = RobotEmotionOption.defaultOptions
 
-    let robotEmotions: [(id: String, name: String, emoji: String)] = [
-        ("happy", "Happy", "😊"),
-        ("sad", "Sad", "😢"),
-        ("angry", "Angry", "😠"),
-        ("surprised", "Surprised", "😲"),
-        ("sleepy", "Sleepy", "😴"),
-        ("blink", "Blink", "😑"),
-        ("lookLeft", "Left", "👈"),
-        ("lookRight", "Right", "👉")
-    ]
+    @State private var selection: Int = 0
+    @State private var eyeScale: CGFloat = 1.0
+    @State private var glowPulse: Bool = false
+    @State private var diagnostics: Diagnostics = Diagnostics()
+
+    private var currentOption: RobotEmotionOption {
+        guard !options.isEmpty else { return RobotEmotionOption.placeholder }
+        let safeIndex = min(max(selection, options.startIndex), options.index(before: options.endIndex))
+        return options[safeIndex]
+    }
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Header
-            Text("Robot")
-                .font(.caption)
-                .foregroundColor(.gray)
-                .padding(.top, 5)
+        VStack(spacing: 10) {
+            header
 
-            // Robot Face Display
-            ZStack {
-                Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: [Color(hex: "2a2a2a"), Color(hex: "1a1a1a")],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                    .frame(width: 100, height: 100)
-                    .shadow(color: Color(hex: "4ecca3").opacity(0.5), radius: 10)
+            RobotFaceCard(
+                option: currentOption,
+                eyeScale: eyeScale,
+                glowPulse: glowPulse
+            )
 
-                WatchRobotFace(emotion: currentEmotion, eyeScale: eyeScale)
-                    .frame(width: 100, height: 100)
+            statusRow
+
+            emotionPicker
+
+            quickActions
+        }
+        .padding(.vertical, 6)
+        .padding(.horizontal, 6)
+        .onAppear { startGlow() }
+        .onChange(of: selection) { _ in selectionChanged() }
+    }
+}
+
+private extension WatchRobotView {
+    var header: some View {
+        HStack {
+            Label {
+                Text("Robot Face")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            } icon: {
+                Image(systemName: "sparkles.rectangle.stack")
+                    .font(.caption2)
+                    .foregroundStyle(.mint)
             }
-            .padding(.vertical, 10)
 
-            // Emotion Name
-            Text(robotEmotions.first(where: { $0.id == currentEmotion })?.name ?? "")
-                .font(.headline)
-                .foregroundColor(Color(hex: "4ecca3"))
+            Spacer()
 
-            // Emotion Selector
-            ScrollView {
-                VStack(spacing: 8) {
-                    ForEach(robotEmotions, id: \.id) { emotion in
-                        Button(action: {
-                            selectEmotion(emotion.id)
-                        }) {
-                            HStack {
-                                Text(emotion.emoji)
-                                    .font(.title3)
-                                Text(emotion.name)
-                                    .font(.caption)
-                                Spacer()
-                                if currentEmotion == emotion.id {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundColor(Color(hex: "4ecca3"))
-                                }
-                            }
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(
-                                currentEmotion == emotion.id ?
-                                    Color(hex: "4ecca3").opacity(0.2) : Color.clear
-                            )
-                            .cornerRadius(8)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.horizontal, 5)
+            Text(currentOption.name.uppercased())
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(currentOption.accent)
+        }
+    }
+
+    var statusRow: some View {
+        HStack(spacing: 6) {
+            RobotBadge(
+                title: "Eye Focus",
+                systemImage: "bolt.circle",
+                value: diagnostics.focus(for: currentOption.id),
+                tint: currentOption.accent
+            )
+            RobotBadge(
+                title: "Mood",
+                systemImage: "waveform.path.ecg",
+                value: diagnostics.mood(for: currentOption.id),
+                tint: .cyan
+            )
+        }
+    }
+
+    var emotionPicker: some View {
+        Picker("Robot Mood", selection: $selection) {
+            ForEach(options.indices, id: \.self) { index in
+                Text(options[index].glyph + " " + options[index].name)
+                    .tag(index)
+            }
+        }
+        .pickerStyle(.wheel)
+        .frame(height: 68)
+        .background(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .fill(Color.black.opacity(0.14))
+        )
+    }
+
+    var quickActions: some View {
+        HStack(spacing: 8) {
+            QuickActionButton(
+                label: "Blink",
+                systemImage: "eye",
+                tint: .indigo.opacity(0.8),
+                action: triggerBlink
+            )
+
+            QuickActionButton(
+                label: "Center",
+                systemImage: "target",
+                tint: .orange.opacity(0.8),
+                action: { setEmotion(withID: "center") }
+            )
+        }
+        .padding(.bottom, 2)
+    }
+
+    func selectionChanged() {
+        WKInterfaceDevice.current().play(.click)
+        diagnostics.refresh()
+    }
+
+    func triggerBlink() {
+        WKInterfaceDevice.current().play(.success)
+        withAnimation(.easeInOut(duration: 0.12)) {
+            eyeScale = 0.05
+        }
+        withAnimation(.easeInOut(duration: 0.18).delay(0.12)) {
+            eyeScale = 1.0
+        }
+        setEmotion(withID: "blink", temporary: true)
+    }
+
+    func setEmotion(withID id: String, temporary: Bool = false) {
+        if let index = options.firstIndex(where: { $0.id == id }) {
+            selection = index
+        } else if temporary {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                selectionChanged()
             }
         }
     }
 
-    private func selectEmotion(_ emotion: String) {
-        currentEmotion = emotion
-        WKInterfaceDevice.current().play(.click)
-
-        // Animate blink
-        if emotion == "blink" {
-            withAnimation(.easeInOut(duration: 0.15)) {
-                eyeScale = 0.1
-            }
-            withAnimation(.easeInOut(duration: 0.15).delay(0.15)) {
-                eyeScale = 1.0
-            }
+    func startGlow() {
+        withAnimation(.easeInOut(duration: 1.4).repeatForever(autoreverses: true)) {
+            glowPulse.toggle()
         }
     }
 }
 
-struct WatchRobotFace: View {
+// MARK: - Subviews
+
+private struct RobotFaceCard: View {
+    let option: RobotEmotionOption
+    let eyeScale: CGFloat
+    let glowPulse: Bool
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color.black.opacity(0.2))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .stroke(option.accent.opacity(glowPulse ? 0.65 : 0.2), lineWidth: glowPulse ? 4 : 1)
+                        .shadow(color: option.accent.opacity(glowPulse ? 0.45 : 0.1), radius: glowPulse ? 8 : 3)
+                )
+
+            WatchRobotFace(emotion: option.id, accent: option.accent, eyeScale: eyeScale)
+                .frame(height: 112)
+        }
+        .frame(height: 118)
+    }
+}
+
+private struct RobotBadge: View {
+    let title: String
+    let systemImage: String
+    let value: Double
+    let tint: Color
+
+    var body: some View {
+        VStack(spacing: 4) {
+            Text(title.uppercased())
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+            Gauge(value: value) {
+                EmptyView()
+            }
+            .gaugeStyle(.accessoryCircularCapacity)
+            .tint(tint)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 4)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Color.black.opacity(0.12))
+        )
+    }
+}
+
+private struct QuickActionButton: View {
+    let label: String
+    let systemImage: String
+    let tint: Color
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Image(systemName: systemImage)
+                    .font(.headline.weight(.semibold))
+                Text(label)
+                    .font(.caption2)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 6)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(tint.opacity(0.22))
+            )
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Rendered Face
+
+private struct WatchRobotFace: View {
     let emotion: String
+    let accent: Color
     let eyeScale: CGFloat
 
     var body: some View {
         Canvas { context, size in
-            let centerX = size.width / 2
-            let centerY = size.height / 2
+            let center = CGPoint(x: size.width / 2, y: size.height / 2)
 
-            // Eye parameters
-            var leftEyeX: CGFloat = centerX - 15
-            var leftEyeY: CGFloat = centerY - 5
-            var rightEyeX: CGFloat = centerX + 5
-            var rightEyeY: CGFloat = centerY - 5
-            var eyeWidth: CGFloat = 10
-            var eyeHeight: CGFloat = 10 * eyeScale
+            // Base bezel
+            let bezelRect = CGRect(x: center.x - 44, y: center.y - 44, width: 88, height: 88)
+            let bezelPath = Path(roundedRect: bezelRect, cornerRadius: 22)
+            context.stroke(bezelPath, with: .color(accent.opacity(0.3)), lineWidth: 2)
 
-            // Adjust based on emotion
-            switch emotion {
-            case "sleepy":
-                eyeHeight = 2
+            // Inner panel
+            let innerRect = bezelRect.insetBy(dx: 6, dy: 6)
+            let panelPath = Path(roundedRect: innerRect, cornerRadius: 18)
+            context.fill(panelPath, with: .linearGradient(
+                Gradient(colors: [Color.black, Color.black.opacity(0.6)]),
+                startPoint: CGPoint(x: innerRect.minX, y: innerRect.minY),
+                endPoint: CGPoint(x: innerRect.maxX, y: innerRect.maxY)
+            ))
 
-            case "lookLeft":
-                leftEyeX -= 5
-                rightEyeX -= 5
+            drawEyes(context: context, rect: innerRect)
+            drawEmotionMarks(context: context, rect: innerRect)
+        }
+    }
 
-            case "lookRight":
-                leftEyeX += 5
-                rightEyeX += 5
+    private func drawEyes(context: GraphicsContext, rect: CGRect) {
+        let eyeWidth: CGFloat = 20
+        let eyeHeight: CGFloat = 14 * eyeScale
+        let verticalOffset: CGFloat = 10
+        var leftEyeOrigin = CGPoint(x: rect.midX - 28, y: rect.midY - verticalOffset)
+        var rightEyeOrigin = CGPoint(x: rect.midX + 8, y: rect.midY - verticalOffset)
 
-            case "surprised":
-                eyeWidth = 15
-                eyeHeight = 15 * eyeScale
-                leftEyeX -= 2.5
-                rightEyeX -= 2.5
-                leftEyeY -= 2.5
-                rightEyeY -= 2.5
+        switch emotion {
+        case "lookLeft":
+            leftEyeOrigin.x -= 6
+            rightEyeOrigin.x -= 6
+        case "lookRight":
+            leftEyeOrigin.x += 6
+            rightEyeOrigin.x += 6
+        case "surprised":
+            leftEyeOrigin.y -= 4
+            rightEyeOrigin.y -= 4
+        case "sleepy":
+            leftEyeOrigin.y += 8
+            rightEyeOrigin.y += 8
+        default:
+            break
+        }
 
-            default:
-                break
-            }
+        let eyeCornerRadius: CGFloat = emotion == "surprised" ? eyeWidth / 2 : 6
+        let leftEyeRect = CGRect(origin: leftEyeOrigin, size: CGSize(width: emotion == "surprised" ? 24 : eyeWidth, height: eyeHeight))
+        let rightEyeRect = CGRect(origin: rightEyeOrigin, size: CGSize(width: emotion == "surprised" ? 24 : eyeWidth, height: eyeHeight))
 
-            // Draw left eye
-            let leftEyeRect = CGRect(x: leftEyeX, y: leftEyeY, width: eyeWidth, height: eyeHeight)
-            let leftEyePath = Path(roundedRect: leftEyeRect, cornerRadius: 3)
-            context.fill(leftEyePath, with: .color(Color(hex: "4ecca3")))
+        let eyeColor = accent.opacity(0.9)
+        context.fill(Path(roundedRect: leftEyeRect, cornerRadius: eyeCornerRadius), with: .color(eyeColor))
+        context.fill(Path(roundedRect: rightEyeRect, cornerRadius: eyeCornerRadius), with: .color(eyeColor))
+    }
 
-            // Draw right eye
-            let rightEyeRect = CGRect(x: rightEyeX, y: rightEyeY, width: eyeWidth, height: eyeHeight)
-            let rightEyePath = Path(roundedRect: rightEyeRect, cornerRadius: 3)
-            context.fill(rightEyePath, with: .color(Color(hex: "4ecca3")))
+    private func drawEmotionMarks(context: GraphicsContext, rect: CGRect) {
+        switch emotion {
+        case "happy":
+            drawArc(context: context, rect: rect, isUpturned: true)
+        case "sad":
+            drawArc(context: context, rect: rect, isUpturned: false)
+        case "angry":
+            drawBrows(context: context, rect: rect, inverted: false)
+        case "blink":
+            drawBlink(context: context, rect: rect)
+        case "center":
+            drawFocusTarget(context: context, rect: rect)
+        default:
+            break
+        }
+    }
 
-            // Draw emotion overlays
-            switch emotion {
-            case "happy":
-                // Small upturned triangles
-                for i in 0..<3 {
-                    let offset = CGFloat(i) * 1.5
+    private func drawArc(context: GraphicsContext, rect: CGRect, isUpturned: Bool) {
+        let startY = rect.midY + (isUpturned ? 12 : -12)
+        let controlY = rect.midY + (isUpturned ? 4 : -4)
+        let path = Path { path in
+            path.move(to: CGPoint(x: rect.minX + 22, y: startY))
+            path.addQuadCurve(
+                to: CGPoint(x: rect.maxX - 22, y: startY),
+                control: CGPoint(x: rect.midX, y: controlY)
+            )
+        }
+        context.stroke(path, with: .color(.black.opacity(0.6)), lineWidth: 3)
+    }
 
-                    var leftPath = Path()
-                    leftPath.move(to: CGPoint(x: leftEyeX - offset, y: leftEyeY + eyeHeight))
-                    leftPath.addLine(to: CGPoint(x: leftEyeX + eyeWidth / 2, y: leftEyeY + eyeHeight - offset))
-                    leftPath.addLine(to: CGPoint(x: leftEyeX + eyeWidth + offset, y: leftEyeY + eyeHeight))
-                    context.fill(leftPath, with: .color(.black))
+    private func drawBrows(context: GraphicsContext, rect: CGRect, inverted: Bool) {
+        let offset: CGFloat = inverted ? -6 : 6
+        let leftStart = CGPoint(x: rect.minX + 12, y: rect.minY + 18 + offset)
+        let leftEnd = CGPoint(x: rect.midX - 4, y: rect.minY + 14)
+        let rightStart = CGPoint(x: rect.maxX - 12, y: rect.minY + 18 + offset)
+        let rightEnd = CGPoint(x: rect.midX + 4, y: rect.minY + 14)
 
-                    var rightPath = Path()
-                    rightPath.move(to: CGPoint(x: rightEyeX - offset, y: rightEyeY + eyeHeight))
-                    rightPath.addLine(to: CGPoint(x: rightEyeX + eyeWidth / 2, y: rightEyeY + eyeHeight - offset))
-                    rightPath.addLine(to: CGPoint(x: rightEyeX + eyeWidth + offset, y: rightEyeY + eyeHeight))
-                    context.fill(rightPath, with: .color(.black))
-                }
+        context.stroke(Path { $0.addLines([leftStart, leftEnd]) }, with: .color(.black.opacity(0.6)), lineWidth: 3)
+        context.stroke(Path { $0.addLines([rightStart, rightEnd]) }, with: .color(.black.opacity(0.6)), lineWidth: 3)
+    }
 
-            case "sad":
-                // Small downturned triangles
-                for i in 0..<3 {
-                    let offset = CGFloat(i) * 1.5
+    private func drawBlink(context: GraphicsContext, rect: CGRect) {
+        let path = Path { path in
+            path.move(to: CGPoint(x: rect.minX + 16, y: rect.midY))
+            path.addLine(to: CGPoint(x: rect.maxX - 16, y: rect.midY))
+        }
+        context.stroke(path, with: .color(.black.opacity(0.65)), lineWidth: 4)
+    }
 
-                    var leftPath = Path()
-                    leftPath.move(to: CGPoint(x: leftEyeX - offset, y: leftEyeY))
-                    leftPath.addLine(to: CGPoint(x: leftEyeX + eyeWidth / 2, y: leftEyeY + offset))
-                    leftPath.addLine(to: CGPoint(x: leftEyeX + eyeWidth + offset, y: leftEyeY))
-                    context.fill(leftPath, with: .color(.black))
+    private func drawFocusTarget(context: GraphicsContext, rect: CGRect) {
+        let targetRect = rect.insetBy(dx: 24, dy: 24)
+        context.stroke(Path(roundedRect: targetRect, cornerRadius: 14), with: .color(accent.opacity(0.25)), lineWidth: 2)
+    }
+}
 
-                    var rightPath = Path()
-                    rightPath.move(to: CGPoint(x: rightEyeX - offset, y: rightEyeY))
-                    rightPath.addLine(to: CGPoint(x: rightEyeX + eyeWidth / 2, y: rightEyeY + offset))
-                    rightPath.addLine(to: CGPoint(x: rightEyeX + eyeWidth + offset, y: rightEyeY))
-                    context.fill(rightPath, with: .color(.black))
-                }
+// MARK: - Supporting Types
 
-            case "angry":
-                // Angry brows
-                for i in 0..<5 {
-                    let iFloat = CGFloat(i) * 0.5
+private struct RobotEmotionOption: Identifiable {
+    let id: String
+    let name: String
+    let glyph: String
+    let accent: Color
 
-                    var leftPath = Path()
-                    leftPath.move(to: CGPoint(x: leftEyeX, y: leftEyeY + iFloat))
-                    leftPath.addLine(to: CGPoint(x: leftEyeX + eyeWidth - iFloat, y: leftEyeY))
-                    leftPath.addLine(to: CGPoint(x: leftEyeX + eyeWidth, y: leftEyeY))
-                    context.fill(leftPath, with: .color(.black))
+    static let placeholder = RobotEmotionOption(id: "center", name: "Center", glyph: "◎", accent: Color(hex: "4ecca3"))
 
-                    var rightPath = Path()
-                    rightPath.move(to: CGPoint(x: rightEyeX, y: rightEyeY))
-                    rightPath.addLine(to: CGPoint(x: rightEyeX + iFloat, y: rightEyeY))
-                    rightPath.addLine(to: CGPoint(x: rightEyeX + eyeWidth, y: rightEyeY + iFloat))
-                    context.fill(rightPath, with: .color(.black))
-                }
+    static let defaultOptions: [RobotEmotionOption] = [
+        RobotEmotionOption(id: "happy", name: "Delight", glyph: "😊", accent: Color(hex: "4ecca3")),
+        RobotEmotionOption(id: "lookLeft", name: "Tracking", glyph: "👈", accent: .blue),
+        RobotEmotionOption(id: "lookRight", name: "Sweep", glyph: "👉", accent: .purple),
+        RobotEmotionOption(id: "surprised", name: "Alert", glyph: "😲", accent: .yellow),
+        RobotEmotionOption(id: "sleepy", name: "Rest", glyph: "😴", accent: .mint),
+        RobotEmotionOption(id: "angry", name: "Guard", glyph: "😠", accent: .red),
+        RobotEmotionOption(id: "blink", name: "Blink", glyph: "😑", accent: .gray),
+        RobotEmotionOption(id: "center", name: "Center", glyph: "◎", accent: Color(hex: "4ecca3"))
+    ]
+}
 
-            default:
-                break
-            }
+private struct Diagnostics {
+    mutating func refresh() {}
+
+    func focus(for id: String) -> Double {
+        switch id {
+        case "lookLeft", "lookRight": return 0.95
+        case "surprised": return 0.85
+        case "sleepy": return 0.4
+        default: return 0.7
+        }
+    }
+
+    func mood(for id: String) -> Double {
+        switch id {
+        case "happy": return 0.92
+        case "surprised": return 0.78
+        case "sleepy": return 0.35
+        case "angry": return 0.42
+        default: return 0.6
         }
     }
 }

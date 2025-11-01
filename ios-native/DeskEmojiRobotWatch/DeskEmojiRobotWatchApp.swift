@@ -1,29 +1,35 @@
 import SwiftUI
 
 @main
-struct DeskEmojiRobotWatch_Watch_AppApp: App {
+struct DeskEmojiRobotWatchApp: App {
     var body: some Scene {
         WindowGroup {
-            WatchContentView()
+            WatchHomeView()
         }
     }
 }
 
-struct WatchContentView: View {
-    @State private var selectedTab = 0
+struct WatchHomeView: View {
+    @State private var selectedTab: WatchTab = .emoji
+
+    enum WatchTab: Hashable {
+        case emoji
+        case robot
+    }
 
     var body: some View {
         TabView(selection: $selectedTab) {
             WatchEmojiView()
-                .tag(0)
+                .tag(WatchTab.emoji)
 
             WatchRobotView()
-                .tag(1)
+                .tag(WatchTab.robot)
         }
-        .tabViewStyle(.page)
+        .tabViewStyle(.verticalPage)
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
 }
 
 #Preview {
-    WatchContentView()
+    WatchHomeView()
 }
