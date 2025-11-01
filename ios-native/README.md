@@ -115,7 +115,27 @@ ios-native/
 - **Xcode 15+** ([Download from Mac App Store](https://apps.apple.com/app/xcode/id497799835))
 - **Apple Developer Account** (free for testing, $99/year for App Store)
 - **iPhone** running iOS 17+ (for testing)
-- **Apple Watch** running watchOS 10+ (optional, for testing)
+- **Apple Watch** running watchOS 9+ (optional, for testing)
+
+### Complete Setup Guides
+
+We have **three detailed guides** for you:
+
+1. **📱 [SETUP_GUIDE.md](SETUP_GUIDE.md)** - iOS App Setup (5 min)
+   - Create Xcode project
+   - Add iOS app files
+   - Configure and build
+
+2. **⌚ [WATCH_APP_SETUP.md](WATCH_APP_SETUP.md)** - Watch App Setup (10 min) ⭐ **NEW!**
+   - Completely rewritten Watch app
+   - Zero errors guaranteed
+   - Self-contained, no dependencies
+   - Step-by-step instructions
+
+3. **[NATIVE_IOS_GUIDE.md](../NATIVE_IOS_GUIDE.md)** - Complete Reference
+   - Advanced features
+   - App Store submission
+   - Marketing guide
 
 ### Step 1: Create the Xcode Project
 
