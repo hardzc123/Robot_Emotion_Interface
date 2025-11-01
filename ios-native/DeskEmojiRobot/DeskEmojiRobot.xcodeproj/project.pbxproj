@@ -7,56 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C24D23702EB50B4800181AC7 /* DeskEmojiRobotWatch.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C24D23652EB50B4800181AC7 /* DeskEmojiRobotWatch.appex */; };
-		C24D237B2EB50B4800181AC7 /* DeskEmojiRobotWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C24D23662EB50B4800181AC7 /* DeskEmojiRobotWatchApp.app */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C24D23712EB50B4800181AC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C24D23482EB50A3C00181AC7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C24D23632EB50B4800181AC7;
-			remoteInfo = DeskEmojiRobotWatch;
-		};
-		C24D237D2EB50B4800181AC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C24D23482EB50A3C00181AC7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C24D23642EB50B4800181AC7;
-			remoteInfo = DeskEmojiRobotWatchApp;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C24D236D2EB50B4800181AC7 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				C24D23702EB50B4800181AC7 /* DeskEmojiRobotWatch.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C24D237C2EB50B4800181AC7 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-				C24D237B2EB50B4800181AC7 /* DeskEmojiRobotWatchApp.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C24D23502EB50A3C00181AC7 /* DeskEmojiRobot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskEmojiRobot.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C24D23652EB50B4800181AC7 /* DeskEmojiRobotWatch.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DeskEmojiRobotWatch.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		C24D23662EB50B4800181AC7 /* DeskEmojiRobotWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskEmojiRobotWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -70,29 +30,10 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		C24D23672EB50B4800181AC7 /* DeskEmojiRobotWatch */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DeskEmojiRobotWatch;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C24D234D2EB50A3C00181AC7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C24D236A2EB50B4800181AC7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C24D236B2EB50B4800181AC7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -107,7 +48,6 @@
 			children = (
 				C24D23522EB50A3C00181AC7 /* DeskEmojiRobot */,
 				C24D23612EB50A3C00181AC7 /* Shared */,
-				C24D23672EB50B4800181AC7 /* DeskEmojiRobotWatch */,
 				C24D23512EB50A3C00181AC7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,8 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				C24D23502EB50A3C00181AC7 /* DeskEmojiRobot.app */,
-				C24D23662EB50B4800181AC7 /* DeskEmojiRobotWatchApp.app */,
-				C24D23652EB50B4800181AC7 /* DeskEmojiRobotWatch.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,12 +70,10 @@
 				C24D234C2EB50A3C00181AC7 /* Sources */,
 				C24D234D2EB50A3C00181AC7 /* Frameworks */,
 				C24D234E2EB50A3C00181AC7 /* Resources */,
-				C24D237C2EB50B4800181AC7 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C24D237E2EB50B4800181AC7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C24D23522EB50A3C00181AC7 /* DeskEmojiRobot */,
@@ -149,49 +85,6 @@
 			productName = DeskEmojiRobot;
 			productReference = C24D23502EB50A3C00181AC7 /* DeskEmojiRobot.app */;
 			productType = "com.apple.product-type.application";
-		};
-		C24D23632EB50B4800181AC7 /* DeskEmojiRobotWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C24D23762EB50B4800181AC7 /* Build configuration list for PBXNativeTarget "DeskEmojiRobotWatch" */;
-			buildPhases = (
-				C24D23682EB50B4800181AC7 /* Sources */,
-				C24D236A2EB50B4800181AC7 /* Frameworks */,
-				C24D23692EB50B4800181AC7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				C24D23612EB50A3C00181AC7 /* Shared */,
-				C24D23672EB50B4800181AC7 /* DeskEmojiRobotWatch */,
-			);
-			name = DeskEmojiRobotWatch;
-			packageProductDependencies = (
-			);
-			productName = DeskEmojiRobotWatch;
-			productReference = C24D23652EB50B4800181AC7 /* DeskEmojiRobotWatch.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
-		};
-		C24D23642EB50B4800181AC7 /* DeskEmojiRobotWatchApp */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C24D237A2EB50B4800181AC7 /* Build configuration list for PBXNativeTarget "DeskEmojiRobotWatchApp" */;
-			buildPhases = (
-				C24D236B2EB50B4800181AC7 /* Frameworks */,
-				C24D236C2EB50B4800181AC7 /* Resources */,
-				C24D236D2EB50B4800181AC7 /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C24D23722EB50B4800181AC7 /* PBXTargetDependency */,
-			);
-			name = DeskEmojiRobotWatchApp;
-			packageProductDependencies = (
-			);
-			productName = DeskEmojiRobotWatchApp;
-			productReference = C24D23662EB50B4800181AC7 /* DeskEmojiRobotWatchApp.app */;
-			productType = "com.apple.product-type.application.watchapp2";
 		};
 /* End PBXNativeTarget section */
 
@@ -205,14 +98,6 @@
 				TargetAttributes = {
 					C24D234F2EB50A3C00181AC7 = {
 						CreatedOnToolsVersion = 26.0.1;
-					};
-					C24D23632EB50B4800181AC7 = {
-						CreatedOnToolsVersion = 26.0.1;
-						ProvisioningStyle = Automatic;
-					};
-					C24D23642EB50B4800181AC7 = {
-						CreatedOnToolsVersion = 26.0.1;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -231,28 +116,12 @@
 			projectRoot = "";
 			targets = (
 				C24D234F2EB50A3C00181AC7 /* DeskEmojiRobot */,
-				C24D23642EB50B4800181AC7 /* DeskEmojiRobotWatchApp */,
-				C24D23632EB50B4800181AC7 /* DeskEmojiRobotWatch */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C24D234E2EB50A3C00181AC7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C24D23692EB50B4800181AC7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C24D236C2EB50B4800181AC7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -269,26 +138,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C24D23682EB50B4800181AC7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C24D23722EB50B4800181AC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C24D23632EB50B4800181AC7 /* DeskEmojiRobotWatch */;
-			targetProxy = C24D23712EB50B4800181AC7 /* PBXContainerItemProxy */;
-		};
-		C24D237E2EB50B4800181AC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C24D23642EB50B4800181AC7 /* DeskEmojiRobotWatchApp */;
-			targetProxy = C24D237D2EB50B4800181AC7 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -476,122 +328,6 @@
 			};
 			name = Release;
 		};
-		C24D23732EB50B4800181AC7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J8JQ857F94;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "../DeskEmojiRobotWatch/DeskEmojiRobotWatchExtension-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LD_GENERATE_CHAINED_FIXUPS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chi.DeskEmojiRobot.watchapp.extension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "watchos watchsimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.6;
-			};
-			name = Debug;
-		};
-		C24D23742EB50B4800181AC7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J8JQ857F94;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "../DeskEmojiRobotWatch/DeskEmojiRobotWatchExtension-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LD_GENERATE_CHAINED_FIXUPS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chi.DeskEmojiRobot.watchapp.extension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "watchos watchsimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.6;
-			};
-			name = Release;
-		};
-		C24D23772EB50B4800181AC7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J8JQ857F94;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "../DeskEmojiRobotWatch/DeskEmojiRobotWatchApp-Info.plist";
-				LD_GENERATE_CHAINED_FIXUPS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chi.DeskEmojiRobot.watchapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "watchos watchsimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.6;
-			};
-			name = Debug;
-		};
-		C24D23782EB50B4800181AC7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J8JQ857F94;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "../DeskEmojiRobotWatch/DeskEmojiRobotWatchApp-Info.plist";
-				LD_GENERATE_CHAINED_FIXUPS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chi.DeskEmojiRobot.watchapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "watchos watchsimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.6;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -609,24 +345,6 @@
 			buildConfigurations = (
 				C24D235C2EB50A3E00181AC7 /* Debug */,
 				C24D235D2EB50A3E00181AC7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C24D23762EB50B4800181AC7 /* Build configuration list for PBXNativeTarget "DeskEmojiRobotWatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C24D23732EB50B4800181AC7 /* Debug */,
-				C24D23742EB50B4800181AC7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C24D237A2EB50B4800181AC7 /* Build configuration list for PBXNativeTarget "DeskEmojiRobotWatchApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C24D23772EB50B4800181AC7 /* Debug */,
-				C24D23782EB50B4800181AC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
